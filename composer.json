@@ -32,7 +32,7 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Includes/functions/healpers.php"
+            "app/Includes/functions/helpers.php"
         ]
     },
     "scripts": {
