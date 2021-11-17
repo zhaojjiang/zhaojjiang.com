@@ -30,7 +30,10 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "app/Includes/functions/healpers.php"
+        ]
     },
     "scripts": {
         "post-autoload-dump": [
