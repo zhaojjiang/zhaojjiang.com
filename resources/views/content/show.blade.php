@@ -51,8 +51,8 @@
             </div>
         </div>
 
-        <textarea id="data_content_md" style="display: none">{{ $content->content_md }}</textarea>
         <div id="content-box" class="col-lg-8 offset-lg-3 h-100 w-lg-75 offset-lg-w20">
+            <textarea id="data_content_md" style="display: none">{{ $content->content_md }}</textarea>
             <div id="content-container">
                 <h1>{{ $content->title }}</h1>
 

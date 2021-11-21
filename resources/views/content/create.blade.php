@@ -43,8 +43,6 @@
         </div>
     </div>
 
-    <textarea id="data_content_md" style="display: none">{{ !$is_edit ? old('content_id') :  $content->content_md }}</textarea>
-
     <form action="{{ !$is_edit ? route('content.store') : route('content.update', $content) }}" method="POST"
           class="offset-3 col-8 offset-w20 w-75">
         {{ $is_edit ? method_field('PUT') : '' }}
@@ -56,9 +54,10 @@
                        autocomplete="off" value="{{ $is_edit ? $content->title : old('title') }}">
             </div>
         </div>
+
+        <textarea id="data_content_md" style="display: none">{{ !$is_edit ? old('content_id') :  $content->content_md }}</textarea>
         <div id="editor-md" style="width: 100%; min-height: 500px;">
-            <label for="content"></label>
-            <textarea id="content"></textarea>
+
         </div>
 
         <input type="submit" class="btn btn-primary w-100" value="保存">
