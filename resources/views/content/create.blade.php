@@ -43,6 +43,8 @@
         </div>
     </div>
 
+    <textarea id="data_content_md" style="display: none">{{ !$is_edit ? old('content_id') :  $content->content_md }}</textarea>
+
     <form action="{{ !$is_edit ? route('content.store') : route('content.update', $content) }}" method="POST"
           class="offset-3 col-8 offset-w20 w-75">
         {{ $is_edit ? method_field('PUT') : '' }}
@@ -79,7 +81,7 @@
     $(function () {
         let editor = editormd('editor-md', {
             path: '/assets/editor.md/lib/',
-            markdown: '{{ !$is_edit ? js_text(old('content_md')) : js_text($content->content_md) }}',
+            markdown: $('#data_content_md').text(),
             saveHTMLToTextarea: true,
             name: 'content_md',
             htmlName: 'content_html',

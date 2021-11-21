@@ -51,6 +51,7 @@
             </div>
         </div>
 
+        <textarea id="data_content_md" style="display: none">{{ $content->content_md }}</textarea>
         <div id="content-box" class="col-lg-8 offset-lg-3 h-100 w-lg-75 offset-lg-w20">
             <div id="content-container">
                 <h1>{{ $content->title }}</h1>
@@ -75,7 +76,7 @@
 <script>
     $(function () {
         let view = editormd.markdownToHTML('content-container', {
-            markdown: '{{ js_text($content->content_md) }}',
+            markdown: $('#data_content_md').text(),
             tocContainer: '#toc-container',
             tocTitle: '目录',
             tocDropdown: true,
