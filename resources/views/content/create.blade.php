@@ -75,7 +75,7 @@
 </div>
 </body>
 
-<script src="{{ asset('assets/editor.md/editormd.min.js') }}"></script>
+<script src="{{ asset('assets/editor.md/editormd.js') }}"></script>
 <script>
     $(function () {
         let editor = editormd('editor-md', {
