@@ -1893,6 +1893,7 @@
             if (settings.autoHeight && !state.fullscreen && !state.preview)
             {
                 editor.css("height", "auto");
+                codeMirror.css("margin-top", toolbar.height() + 1).height(editor.height() - toolbar.height());
                 codeMirror.css("height", "auto");
             }
             else
