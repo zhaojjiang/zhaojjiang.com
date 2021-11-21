@@ -15,3 +15,10 @@ if (!function_exists('is_https')) {
         return false;
     }
 }
+
+if (!function_exists('js_text')) {
+    function js_text($text)
+    {
+        return str_replace("\r\n", "\\r\\n", $text);
+    }
+}
