@@ -13,13 +13,10 @@
         a {
             text-decoration: unset;
         }
-        #toc-container {
-            padding: 18px;
-        }
         .device-toc-border {
             border-bottom: grey 1px solid;
         }
-        @media (min-width: 997px) {
+        @media (min-width: 992px) {
             .device-position-fixed {
                 position: fixed !important;
             }
@@ -27,21 +24,46 @@
                 border-bottom: unset;
                 border-right: grey 1px solid;
             }
+            .w-lg-20 {
+                width: 20%;
+            }
+            .offset-lg-w20 {
+                margin-left: 20%;
+            }
+            .w-lg-75 {
+                width: 75%;
+            }
+            .offset-lg-w95 {
+                margin-left: 95%;
+            }
+            .w-lg-5 {
+                width: 5%;
+            }
         }
     </style>
 </head>
 <body>
 <div>
     <div class="d-lg-flex">
-        <div id="toc-container" class="col-lg-3 h-100 overflow-auto device-position-fixed device-toc-border">
-            <div id="toc-view">
+        <div id="toc-box" class="col-lg-3 h-100 overflow-auto device-position-fixed device-toc-border w-lg-20">
+            <div id="toc-container">
 
             </div>
         </div>
-        <div id="content-container" class="offset-lg-3 h-100">
-            <div id="content-view">
+
+        <div id="content-box" class="col-lg-8 offset-lg-3 h-100 w-lg-75 offset-lg-w20">
+            <div id="content-container">
                 <h1>{{ $content->title }}</h1>
+
             </div>
+        </div>
+
+        <div class="col-lg-1 offset-lg-11 position-fixed h-100 w-lg-5 offset-lg-w95">
+            <a class="btn btn-primary btn-sm" href="{{ route('content.index') }}">List</a>
+            <a class="btn btn-primary btn-sm" href="{{ route('content.edit', $content) }}">Edit</a>
+            <a class="btn btn-primary btn-sm" href="{{ route('content.create') }}">New</a>
+            <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(window.top)">Top</div>
+            <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(0, document.documentElement.scrollHeight)">End</div>
         </div>
     </div>
 </div>
@@ -52,9 +74,9 @@
 <script src="{{ asset('assets/editor.md/lib/prettify.min.js') }}"></script>
 <script>
     $(function () {
-        let view = editormd.markdownToHTML('content-view', {
+        let view = editormd.markdownToHTML('content-container', {
             markdown: '{{ js_text($content->content_md) }}',
-            tocContainer: '#toc-view',
+            tocContainer: '#toc-container',
             tocTitle: '目录',
             tocDropdown: true,
             tocStartLevel: 2,

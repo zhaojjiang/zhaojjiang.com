@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ContentController extends Controller
 {
+    public function index()
+    {
+        $contents = Content::query()->get();
+        return view('content.index', compact('contents'));
+    }
+
     public function show(Content $content)
     {
         return view('content.show', compact('content'));
@@ -55,8 +61,9 @@ class ContentController extends Controller
         return redirect()->route('content.show', $content);
     }
 
-    public function destroy()
+    public function destroy(Content $content)
     {
-        ;
+        $content->delete();
+        return redirect()->route('content.index');
     }
 }
