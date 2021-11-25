@@ -13,17 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('login', 'Auth\LoginController@loginForm')->name('login');
-    Route::post('login', 'Auth\LoginController@login')->name('login.submit')
-        ->middleware('throttle:5,1800');
-});
+Route::get('login', 'Auth\LoginController@loginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('login.submit');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-
-    Route::resource('content', 'ContentController');
-});
+Route::resource('content', 'ContentController');
 
 Route::group(['namespace' => 'Page'], function () {
     Route::get('welcome', 'PagesController@welcome');

@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Enums\InfoLevel;
 use App\Models\Content;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ContentController extends Controller
 {
+    private $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
     public function index()
     {
         $contents = Content::query()->get();
