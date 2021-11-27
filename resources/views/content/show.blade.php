@@ -60,6 +60,11 @@
 
         <div class="col-lg-1 offset-lg-11 position-fixed h-100 w-lg-5 offset-lg-w95 d-none d-lg-block">
             <a class="btn btn-primary btn-sm" href="{{ route('content.edit', $content) }}">Edit</a>
+            <form action="{{ route('content.destroy', $content) }}" method="POST"
+                  onsubmit="if(!confirm('删除？')) return false;">
+                {{ csrf_field() }}{{ method_field('DELETE') }}
+                <button type="submit" class="btn btn-danger btn-sm">DEL</button>
+            </form>
             <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(window.top)">Top</div>
             <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(0, document.documentElement.scrollHeight)">End</div>
         </div>
