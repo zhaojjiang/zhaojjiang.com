@@ -11,9 +11,11 @@
 @section('content')
     <div class="container pt-3">
         <ul class="list-group {{--list-group-numbered--}}">
-            <li class="list-group-item">
-                <a href="{{ route('content.create') }}" class="btn btn-sm btn-outline-primary float-end">New</a>
-            </li>
+            @if(\Illuminate\Support\Facades\Auth::user())
+                <li class="list-group-item">
+                    <a href="{{ route('content.create') }}" class="btn btn-sm btn-outline-primary float-end">New</a>
+                </li>
+            @endif
             @foreach($contents as $content)
                 <li class="list-group-item">
                     <a href="{{ route('content.show', $content) }}">{{ $content->title }}</a>
