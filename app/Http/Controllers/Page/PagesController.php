@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Page;
 
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\Controller;
 
 class PagesController extends Controller
@@ -13,6 +14,7 @@ class PagesController extends Controller
 
     public function home()
     {
-        return view('pages.home');
+        //return view('pages.home');
+        return (new ContentController(request()))->index();
     }
 }

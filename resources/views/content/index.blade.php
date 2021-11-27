@@ -1,22 +1,25 @@
-<!doctype html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Index</title>
+@extends('layouts.layout')
+
+@section('style')
     <style>
         a {
             text-decoration: unset;
         }
     </style>
-</head>
-<body>
-@foreach($contents as $content)
-    <div>
-        <a href="{{ route('content.show', $content) }}">{{ $content->title }}</a> {{ $content->created_at }}
+@endsection
+
+@section('content')
+    <div class="container pt-3">
+        <ul class="list-group {{--list-group-numbered--}}">
+            <li class="list-group-item">
+                <a href="{{ route('content.create') }}" class="btn btn-sm btn-outline-primary float-end">New</a>
+            </li>
+            @foreach($contents as $content)
+                <li class="list-group-item">
+                    <a href="{{ route('content.show', $content) }}">{{ $content->title }}</a>
+                    <span class="float-end">{{ $content->created_at }}</span>
+                </li>
+            @endforeach
+        </ul>
     </div>
-@endforeach
-</body>
-</html>
+@endsection
