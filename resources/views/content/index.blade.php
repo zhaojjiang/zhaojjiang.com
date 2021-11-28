@@ -20,8 +20,8 @@
                 <li class="list-group-item">
                     <a href="{{ route('content.show', $content) }}">{{ $content->title }}</a>
                     <span class="float-end text-muted"
-                          title="更新于 {{ $content->updated_at->format('Y/m/d H:i') }}">
-                        {{ $content->created_at->format('Y/m/d H:i') }}
+                          title="创建于 {{ $content->created_at->format('Y/m/d H:i') }} &#10;更新于 {{ $content->updated_at->format('Y/m/d H:i') }}">
+                        {{ $content->created_at->diffForHumans() }}
                     </span>
                 </li>
             @endforeach

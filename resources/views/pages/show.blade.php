@@ -17,9 +17,9 @@
             <textarea id="data_content_md" class="d-none">{{ $page->content_md }}</textarea>
             <div id="content-container">
                 <h1>{{ $page->title }}</h1>
-                <div class="text-muted"
-                      title="更新于 {{ $page->updated_at->format('Y/m/d H:i') }}">
-                    {{ $page->created_at->format('Y/m/d H:i') }}
+                <div class="text-muted mb-3 border-bottom"
+                     title="创建于 {{ $page->created_at->format('Y/m/d H:i') }} &#10;更新于 {{ $page->updated_at->format('Y/m/d H:i') }}">
+                    {{ $page->created_at->diffForHumans() }}
                 </div>
             </div>
         </div>
