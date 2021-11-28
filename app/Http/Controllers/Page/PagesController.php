@@ -15,6 +15,7 @@ class PagesController extends Controller
 
     public function __construct(Request $request)
     {
+        $this->middleware('auth')->except('home', 'about', 'show');
         $this->request = $request;
     }
 
