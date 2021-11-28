@@ -19,7 +19,10 @@
             @foreach($contents as $content)
                 <li class="list-group-item">
                     <a href="{{ route('content.show', $content) }}">{{ $content->title }}</a>
-                    <span class="float-end">{{ $content->updated_at }}</span>
+                    <span class="float-end text-muted"
+                          title="更新于 {{ $content->updated_at->format('Y/m/d H:i') }}">
+                        {{ $content->created_at->format('Y/m/d H:i') }}
+                    </span>
                 </li>
             @endforeach
         </ul>
