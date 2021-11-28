@@ -37,5 +37,17 @@
 </div>
 
 @yield('script')
+
+@if(!empty($bd_tongji_id = \App\Models\Setting::get('bd_tongji_id')))
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?{{ $bd_tongji_id }}";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+@endif
 </body>
 </html>
