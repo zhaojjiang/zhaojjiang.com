@@ -19,7 +19,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::resource('content', 'ContentController');
 
-Route::group(['namespace' => 'Page'], function () {
-    Route::get('welcome', 'PagesController@welcome');
-    Route::get('/', 'PagesController@home')->name('home');
-});
+Route::get('/', 'Page\PagesController@home')->name('home');
+Route::get('/welcome', 'Page\PagesController@welcome')->name('page.welcome');
+Route::get('/about', 'Page\PagesController@about')->name('page.about');
+Route::resource('page', 'Page\PagesController')->except('destroy', 'create', 'store');

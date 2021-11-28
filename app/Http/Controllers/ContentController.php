@@ -19,12 +19,13 @@ class ContentController extends Controller
 
     public function index()
     {
-        $contents = Content::query()->get();
+        $contents = Content::query()->scopes(['type' => [Content::TYPE_POST]])->get();
         return view('content.index', compact('contents'));
     }
 
-    public function show(Content $content)
+    public function show($content)
     {
+        $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->findOrFail($content);
         return view('content.show', compact('content'));
     }
 
@@ -45,17 +46,20 @@ class ContentController extends Controller
             return back()->withInput()->with(InfoLevel::ERROR, $validator->messages()->first());
         }
 
+        $data['type'] = Content::TYPE_POST;
         $content = Content::query()->create($data);
         return redirect()->route('content.show', $content);
     }
 
-    public function edit(Content $content)
+    public function edit($content)
     {
+        $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->findOrFail($content);
         return view('content.create', compact('content'))->with('is_edit', true);
     }
 
-    public function update(Content $content)
+    public function update($content)
     {
+        $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->findOrFail($content);
         $data = $this->request->only(['title', 'content_md', 'content_html']);
         $validator = Validator::make($data, [
             'title' => ['required'],
@@ -70,8 +74,9 @@ class ContentController extends Controller
         return redirect()->route('content.show', $content);
     }
 
-    public function destroy(Content $content)
+    public function destroy($content)
     {
+        $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->findOrFail($content);
         $content->delete();
         return redirect()->route('content.index');
     }
