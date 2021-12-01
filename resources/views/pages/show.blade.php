@@ -11,9 +11,10 @@
     </style>
 @endsection
 
+@section('content-class', 'col-12')
 @section('content')
     <div class="d-flex container">
-        <div id="content-box" class="col-11 h-100">
+        <div id="content-box" class="col-11">
             <textarea id="data_content_md" class="d-none">{{ $page->content_md }}</textarea>
             <div id="content-container">
                 <h1>{{ $page->title }}</h1>
@@ -24,12 +25,14 @@
             </div>
         </div>
 
-        <div class="col-lg-1 offset-lg-10 position-fixed h-100 d-none d-lg-block">
-            @if(\Illuminate\Support\Facades\Auth::user())
-                <a class="btn btn-primary btn-sm" href="{{ route('page.edit', $page->name) }}">Edit</a>
-            @endif
-            <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(window.top)">Top</div>
-            <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(0, document.documentElement.scrollHeight)">End</div>
+        <div class="col-1">
+            <div class="position-fixed">
+                @if(\Illuminate\Support\Facades\Auth::user())
+                    <a class="btn btn-primary btn-sm" href="{{ route('page.edit', $page->name) }}">Edit</a>
+                @endif
+                <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(window.top)">Top</div>
+                <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(0, document.documentElement.scrollHeight)">End</div>
+            </div>
         </div>
     </div>
 @endsection

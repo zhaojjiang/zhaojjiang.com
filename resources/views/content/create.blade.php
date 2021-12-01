@@ -8,43 +8,23 @@
         a {
             text-decoration: unset;
         }
-        .toc-border {
-            border-right: grey 1px solid;
-        }
-        .w-20 {
-            width: 20%;
-        }
-        .offset-w20 {
-            margin-left: 20%;
-        }
-        .w-75 {
-            width: 75%;
-        }
-        .w-5 {
-            width: 5%;
-        }
-        .offset-w95 {
-            margin-left: 95%;
-        }
-        #page-header, #page-footer {
-            width: 80%;
-            margin-left: 20%;
-        }
     </style>
 @endsection
 
+@section('sidebar-class', 'col-2 overflow-auto')
 @section('sidebar')
-    <div id="toc-box" class="col-3 h-100 overflow-auto position-fixed toc-border w-20">
+    <div id="toc-box">
         <div id="toc-container">
 
         </div>
     </div>
 @endsection
 
+@section('content-class', 'col-10 overflow-auto')
 @section('content')
     <div class="d-flex">
         <form action="{{ !$is_edit ? route('content.store') : route('content.update', $content) }}" method="POST"
-              class="offset-3 col-8 offset-w20 w-75">
+              class="col-10">
             {{ $is_edit ? method_field('PUT') : '' }}
             {{ csrf_field() }}
 
@@ -66,12 +46,14 @@
             <input type="submit" class="btn btn-primary w-100" value="保存">
         </form>
 
-        <div class="col-1 offset-11 position-fixed h-100 w-5 offset-w95">
-            @if($is_edit)
-            <a class="btn btn-primary btn-sm" href="{{ route('content.show', $content) }}">Show</a>
-            @endif
-            <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(window.top)">Top</div>
-            <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(0, document.documentElement.scrollHeight)">End</div>
+        <div class="col-1">
+            <div class="position-fixed">
+                @if($is_edit)
+                <a class="btn btn-primary btn-sm" href="{{ route('content.show', $content) }}">Show</a>
+                @endif
+                <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(window.top)">Top</div>
+                <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(0, document.documentElement.scrollHeight)">End</div>
+            </div>
         </div>
     </div>
 @endsection
@@ -81,7 +63,7 @@
 <script>
     $(function () {
         let editor = editormd('editor-md', {
-            height: '1000px',
+            height: '640px',
             path: '/assets/editor.md/lib/',
             markdown: $('#data_content_md').text(),
             saveHTMLToTextarea: true,
@@ -93,6 +75,7 @@
             },
             tocContainer: '#toc-container',
             tocStartLevel: 2,
+            toolbarAutoFixed: false,
         });
     });
 </script>

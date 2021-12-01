@@ -8,19 +8,14 @@
         a {
             text-decoration: unset;
         }
-        .w-5 {
-            width: 5%;
-        }
-        .offset-w95 {
-            margin-left: 95%;
-        }
     </style>
 @endsection
 
+@section('content-class', 'col-12')
 @section('content')
     <div class="d-flex container">
         <form action="{{ !$is_edit ? route('page.store') : route('page.update', $page->name) }}" method="POST"
-              class="col-10">
+              class="col-11">
             {{ $is_edit ? method_field('PUT') : '' }}
             {{ csrf_field() }}
 
@@ -42,12 +37,14 @@
             <input type="submit" class="btn btn-primary w-100" value="保存">
         </form>
 
-        <div class="col-1 offset-10 position-fixed h-100">
-            @if($is_edit)
-                <a class="btn btn-primary btn-sm" href="{{ route('page.show', $page->name) }}">Show</a>
-            @endif
-            <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(window.top)">Top</div>
-            <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(0, document.documentElement.scrollHeight)">End</div>
+        <div class="col-1">
+            <div class="position-fixed">
+                @if($is_edit)
+                    <a class="btn btn-primary btn-sm" href="{{ route('page.show', $page->name) }}">Show</a>
+                @endif
+                <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(window.top)">Top</div>
+                <div class="btn btn-secondary btn-sm" onclick="window.scrollTo(0, document.documentElement.scrollHeight)">End</div>
+            </div>
         </div>
     </div>
 @endsection

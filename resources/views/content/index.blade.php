@@ -8,9 +8,10 @@
     </style>
 @endsection
 
+@section('content-class', 'col-12')
 @section('content')
     <div class="container pt-3">
-        <ul class="list-group {{--list-group-numbered--}}">
+        <ul class="list-group">
             @if(\Illuminate\Support\Facades\Auth::user())
                 <li class="list-group-item">
                     <a href="{{ route('content.create') }}" class="btn btn-sm btn-outline-primary float-end">New</a>

@@ -1,4 +1,4 @@
-<header class="p-3 text-white" style="background: darkgrey">
+<header class="p-1 text-white" style="background: darkgrey">
     <div class="d-flex align-items-center justify-content-center justify-content-start">
         <ul class="nav me-auto justify-content-center">
             <li><a href="/" class="nav-link px-2 text-white">首页</a></li>

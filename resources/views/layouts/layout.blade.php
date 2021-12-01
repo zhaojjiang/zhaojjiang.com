@@ -13,27 +13,43 @@
             width: 100%;
             height: 100%;
         }
-        #page-content {
-            min-height: calc(100% - 43px);
+        #page-header {
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+        }
+        #page-sidebar {
+            position: sticky;
+            top: 48px;
+            height: calc(100vh - 48px);
+        }
+        #page-container {
+            padding-top: 48px;
         }
         #page-footer {
+            width: 100%;
             height: 40px;
-            margin-top: 3px;
         }
     </style>
     @yield('style')
 </head>
 <body>
 
-@yield('sidebar')
-<div id="page-content">
+<div class="d-flex flex-column">
     <div id="page-header">
         @include('layouts._header')
     </div>
-    @yield('content')
-</div>
-<div id="page-footer">
-    @include('layouts._footer')
+    <div id="page-container" class="d-flex">
+        <div id="page-sidebar" class="@yield('sidebar-class')">
+            @yield('sidebar')
+        </div>
+        <div id="page-content" class="@yield('content-class')">
+            @yield('content')
+        </div>
+    </div>
+    <div id="page-footer">
+        @include('layouts._footer')
+    </div>
 </div>
 
 @yield('script')
