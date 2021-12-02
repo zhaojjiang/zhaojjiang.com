@@ -21,7 +21,7 @@
         #page-sidebar {
             position: sticky;
             top: 48px;
-            height: calc(100vh - 48px);
+            height: calc(100vh - 48px - 40px);
         }
         #page-container {
             padding-top: 48px;
