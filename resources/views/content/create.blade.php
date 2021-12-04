@@ -4,6 +4,7 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('assets/editor.md/css/editormd.min.css') }}">
+    <link href="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet">
     <style>
         a {
             text-decoration: unset;
@@ -32,25 +33,34 @@
 
             <div class="row">
                 <div class="input-group mb-3">
-                    <span class="input-group-text">标题</span>
-                    <input type="text" id="title" name="title" class="form-control" aria-describedby="basic-addon"
+                    <input type="text" id="title" name="title" class="form-control"
+                           aria-describedby="basic-addon" placeholder="标题"
                            autocomplete="off" value="{{ $is_edit ? $content->title : old('title') }}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon">可见</span>
                     <select name="visibility" id="visibility" class="form-control" aria-describedby="basic-addon">
                         <option value="">选择可见性</option>
                         @foreach(\App\Enums\Visibility::getAllConstants() as $name => $value)
-                            <option value="{{ $value }}">{{ $value }}</option>
+                            <option value="{{ $value }}" {{ $value === ($content->visibility ?? old('visibility')) ? 'selected' : '' }}>{{ $value }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
 
-            <textarea id="data_content_md" style="display: none">{{ !$is_edit ? old('content_id') :  $content->content_md }}</textarea>
+            <div class="row">
+                <div class="input-group mb-3">
+                    <select name="tags[]" id="tags" class="form-control" aria-describedby="basic-addon" multiple>
+                        @foreach($tags as $id => $name)
+                            <option value="{{ $id }}" {{ in_array($id, $tag_ids ?? (array)old('tags')) ? 'selected' : '' }}>{{ $name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <textarea id="data_content_md" style="display: none">{{ !$is_edit ? old('content_md') :  $content->content_md }}</textarea>
             <div id="editor-md" style="width: 100%; min-height: 500px;">
 
             </div>
@@ -72,6 +82,7 @@
 
 @section('script')
 <script src="{{ asset('assets/editor.md/editormd.js') }}"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script>
     $(function () {
         let editor = editormd('editor-md', {
@@ -88,6 +99,12 @@
             tocContainer: '#toc-container',
             tocStartLevel: 2,
             toolbarAutoFixed: false,
+            placeholder: "输入内容",
+        });
+
+        $('#tags').select2({
+            placeholder: '选择标签',
+            allowClear: true,
         });
     });
 </script>

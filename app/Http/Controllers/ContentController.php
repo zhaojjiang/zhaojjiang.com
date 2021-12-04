@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\InfoLevel;
 use App\Enums\Visibility;
 use App\Models\Content;
+use App\Models\ContentTag;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -33,17 +35,19 @@ class ContentController extends Controller
 
     public function create()
     {
-        return view('content.create')->with('is_edit', false);
+        $tags = Tag::query()->pluck('name', 'id')->toArray();
+        return view('content.create', compact('tags'))->with('is_edit', false);
     }
 
     public function store()
     {
-        $data = $this->request->only(['title', 'content_md', 'content_html', 'visibility']);
+        $data = $this->request->only(['title', 'content_md', 'content_html', 'visibility', 'tags']);
         $validator = Validator::make($data, [
             'title' => ['required'],
             'content_md' => ['required_without:content_html'],
             'content_html' => ['required_without:content_md'],
             'visibility' => ['required'],
+            'tags' => ['required', 'max:5'],
         ]);
         if ($validator->fails()) {
             return back()->withInput()->with(InfoLevel::ERROR, $validator->messages()->first());
@@ -53,30 +57,46 @@ class ContentController extends Controller
         $data['visibility'] = Visibility::PUBLIC;
         $data['user_id'] = Auth::id();
         $content = Content::query()->create($data);
+        foreach ($data['tags'] as $tag_id) {
+            ContentTag::query()->create([
+                'content_id' => $content->id,
+                'tag_id' => $tag_id,
+            ]);
+        }
         return redirect()->route('content.show', $content);
     }
 
     public function edit($content)
     {
         $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->findOrFail($content);
-        return view('content.create', compact('content'))->with('is_edit', true);
+        $tag_ids = ContentTag::query()->where('content_id', $content->id)->pluck('tag_id')->toArray();
+        $tags = Tag::query()->pluck('name', 'id')->toArray();
+        return view('content.create', compact('content', 'tag_ids', 'tags'))->with('is_edit', true);
     }
 
     public function update($content)
     {
         $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->findOrFail($content);
-        $data = $this->request->only(['title', 'content_md', 'content_html', 'visibility']);
+        $data = $this->request->only(['title', 'content_md', 'content_html', 'visibility', 'tags']);
         $validator = Validator::make($data, [
             'title' => ['required'],
             'content_md' => ['required_without:content_html'],
             'content_html' => ['required_without:content_md'],
             'visibility' => ['required'],
+            'tags' => ['required', 'max:5'],
         ]);
         if ($validator->fails()) {
             return back()->withInput()->with(InfoLevel::ERROR, $validator->messages()->first());
         }
 
         $content->update($data);
+        ContentTag::query()->where('content_id', $content->id)->delete();
+        foreach ($data['tags'] as $tag_id) {
+            ContentTag::query()->create([
+                'content_id' => $content->id,
+                'tag_id' => $tag_id,
+            ]);
+        }
         return redirect()->route('content.show', $content);
     }
 

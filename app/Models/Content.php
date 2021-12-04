@@ -35,4 +35,10 @@ class Content extends Model
     {
         $builder->where('type', $type);
     }
+
+    public function tags()
+    {
+        return $this->hasManyThrough(Tag::class, ContentTag::class,
+            'content_id', 'id', 'id', 'tag_id');
+    }
 }

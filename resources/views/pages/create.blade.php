@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <textarea id="data_content_md" style="display: none">{{ !$is_edit ? old('content_id') :  $page->content_md }}</textarea>
+            <textarea id="data_content_md" style="display: none">{{ !$is_edit ? old('content_md') :  $page->content_md }}</textarea>
             <div id="editor-md" style="width: 100%; min-height: 500px;">
 
             </div>
