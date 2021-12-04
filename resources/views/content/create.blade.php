@@ -32,9 +32,21 @@
 
             <div class="row">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon">标题</span>
+                    <span class="input-group-text">标题</span>
                     <input type="text" id="title" name="title" class="form-control" aria-describedby="basic-addon"
                            autocomplete="off" value="{{ $is_edit ? $content->title : old('title') }}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon">可见</span>
+                    <select name="visibility" id="visibility" class="form-control" aria-describedby="basic-addon">
+                        <option value="">选择可见性</option>
+                        @foreach(\App\Enums\Visibility::getAllConstants() as $name => $value)
+                            <option value="{{ $value }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 

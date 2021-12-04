@@ -38,11 +38,12 @@ class ContentController extends Controller
 
     public function store()
     {
-        $data = $this->request->only(['title', 'content_md', 'content_html']);
+        $data = $this->request->only(['title', 'content_md', 'content_html', 'visibility']);
         $validator = Validator::make($data, [
             'title' => ['required'],
             'content_md' => ['required_without:content_html'],
             'content_html' => ['required_without:content_md'],
+            'visibility' => ['required'],
         ]);
         if ($validator->fails()) {
             return back()->withInput()->with(InfoLevel::ERROR, $validator->messages()->first());
@@ -64,11 +65,12 @@ class ContentController extends Controller
     public function update($content)
     {
         $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->findOrFail($content);
-        $data = $this->request->only(['title', 'content_md', 'content_html']);
+        $data = $this->request->only(['title', 'content_md', 'content_html', 'visibility']);
         $validator = Validator::make($data, [
             'title' => ['required'],
             'content_md' => ['required_without:content_html'],
             'content_html' => ['required_without:content_md'],
+            'visibility' => ['required'],
         ]);
         if ($validator->fails()) {
             return back()->withInput()->with(InfoLevel::ERROR, $validator->messages()->first());
