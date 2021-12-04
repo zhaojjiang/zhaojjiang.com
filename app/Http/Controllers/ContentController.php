@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\InfoLevel;
+use App\Enums\Visibility;
 use App\Models\Content;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ContentController extends Controller
@@ -47,6 +49,8 @@ class ContentController extends Controller
         }
 
         $data['type'] = Content::TYPE_POST;
+        $data['visibility'] = Visibility::PUBLIC;
+        $data['user_id'] = Auth::id();
         $content = Content::query()->create($data);
         return redirect()->route('content.show', $content);
     }
