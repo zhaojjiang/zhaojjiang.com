@@ -24,6 +24,15 @@
         #toc-box a {
             color: unset;
         }
+        #toc-box ul, #toc-box li {
+            list-style: none;
+        }
+        #toc-box ul.markdown-toc-list {
+            padding-left: 5px;
+        }
+        #toc-box a::before {
+            content: '- ';
+        }
     </style>
 @endsection
 
