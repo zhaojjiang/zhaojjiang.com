@@ -30,6 +30,23 @@
             width: 100%;
             height: 40px;
         }
+        *::-webkit-scrollbar {
+            /*滚动条整体样式*/
+            width: 5px;
+            height: 1px;
+        }
+        *::-webkit-scrollbar-thumb {
+            /*滚动条里的滚动条*/
+            border-radius: 5px;
+            box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+            background: #999;
+        }
+        *::-webkit-scrollbar-track {
+            /*滚动条里的轨道*/
+            box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background: #ededed;
+        }
     </style>
     @yield('style')
 </head>

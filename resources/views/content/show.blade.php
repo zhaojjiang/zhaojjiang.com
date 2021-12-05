@@ -21,6 +21,9 @@
         a.tag:hover {
             color: #1775cc;
         }
+        #toc-box a {
+            color: unset;
+        }
     </style>
 @endsection
 

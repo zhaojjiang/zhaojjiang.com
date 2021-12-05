@@ -9,6 +9,9 @@
         a {
             text-decoration: unset;
         }
+        #toc-box a {
+            color: unset;
+        }
     </style>
 @endsection
 
