@@ -43,6 +43,11 @@
                     @foreach($content->tags as $tag)
                         <a class="tag" href="{{ route('tag.show', $tag) }}">{{ $tag->name }}</a>
                     @endforeach
+                    @if($content->visibility === \App\Enums\Visibility::PRIVATE)
+                        <i class="bi-lock"></i>
+                    @elseif($content->visibility === \App\Enums\Visibility::PROTECTED)
+                        <i class="bi-key"></i>
+                    @endif
                     <span class="float-end text-muted"
                           title="创建于 {{ $content->created_at->format('Y/m/d H:i') }} &#10;更新于 {{ $content->updated_at->format('Y/m/d H:i') }}">
                     {{ $content->created_at->diffForHumans() }}

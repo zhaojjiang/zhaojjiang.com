@@ -50,6 +50,11 @@
                 @foreach($content->tags as $tag)
                     <a class="tag" href="{{ route('tag.show', $tag) }}">{{ $tag->name }}</a>
                 @endforeach
+                @if($content->visibility === \App\Enums\Visibility::PRIVATE)
+                    <i class="bi-lock"></i>
+                @elseif($content->visibility === \App\Enums\Visibility::PROTECTED)
+                    <i class="bi-key"></i>
+                @endif
             </div>
             <div id="content-container">
 
