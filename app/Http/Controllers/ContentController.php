@@ -54,7 +54,6 @@ class ContentController extends Controller
         }
 
         $data['type'] = Content::TYPE_POST;
-        $data['visibility'] = Visibility::PUBLIC;
         $data['user_id'] = Auth::id();
         $content = Content::query()->create($data);
         foreach ($data['tags'] as $tag_id) {
