@@ -18,6 +18,7 @@ Route::post('login', 'Auth\LoginController@login')->name('login.submit');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::resource('content', 'ContentController');
+Route::resource('tag', 'TagsController')->only('index', 'show');
 
 Route::get('/', 'Page\PagesController@home')->name('home');
 Route::get('/welcome', 'Page\PagesController@welcome')->name('page.welcome');

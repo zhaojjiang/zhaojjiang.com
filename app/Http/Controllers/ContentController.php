@@ -29,7 +29,7 @@ class ContentController extends Controller
 
     public function show($content)
     {
-        $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->findOrFail($content);
+        $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->with('tags')->findOrFail($content);
         return view('content.show', compact('content'));
     }
 
@@ -104,6 +104,7 @@ class ContentController extends Controller
     {
         $content = Content::query()->scopes(['type' => [Content::TYPE_POST]])->findOrFail($content);
         $content->delete();
+        ContentTag::query()->where('content_id', $content->id)->delete();
         return redirect()->route('content.index');
     }
 }

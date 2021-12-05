@@ -8,8 +8,18 @@
         a {
             text-decoration: unset;
         }
-        #page-sidebar {
-            max-height: 100vh;
+        a:hover {
+            color: unset;
+        }
+        .tag {
+            background-color: #e8e8e8;
+            color: #1775cc;
+            font-weight: 400;
+            font-size: 0.5em;
+            padding: 4px 6px;
+        }
+        a.tag:hover {
+            color: #1775cc;
         }
     </style>
 @endsection
@@ -28,12 +38,18 @@
     <div class="d-flex">
         <div id="content-box" class="col-11 overflow-hidden">
             <textarea id="data_content_md" class="d-none">{{ $content->content_md }}</textarea>
-            <div id="content-container">
-                <h1>{{ $content->title }}</h1>
-                <div class="text-muted mb-3 border-bottom"
+            <h1 class="p-3">{{ $content->title }}</h1>
+            <div class="mb-3 border-bottom p-3">
+                <span class="text-muted"
                       title="创建于 {{ $content->created_at->format('Y/m/d H:i') }} &#10;更新于 {{ $content->updated_at->format('Y/m/d H:i') }}">
                     {{ $content->created_at->diffForHumans() }}
-                </div>
+                </span>
+                @foreach($content->tags as $tag)
+                    <a class="tag" href="{{ route('tag.show', $tag) }}">{{ $tag->name }}</a>
+                @endforeach
+            </div>
+            <div id="content-container">
+
             </div>
         </div>
 
