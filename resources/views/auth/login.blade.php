@@ -10,6 +10,7 @@
     </style>
 @endsection
 
+@section('content-class', 'col-12')
 @section('content')
     <div class="d-flex w-100 flex-column justify-content-center" style="padding-top: 10%">
         <form action="{{ route('login.submit') }}" method="POST" class="card col-lg-3 col-md-6 offset-lg-4 offset-md-3">
