@@ -24,3 +24,5 @@ Route::get('/', 'Page\PagesController@home')->name('home');
 Route::get('/welcome', 'Page\PagesController@welcome')->name('page.welcome');
 Route::get('/about', 'Page\PagesController@about')->name('page.about');
 Route::resource('page', 'Page\PagesController')->except('destroy', 'create', 'store');
+
+Route::post('file-uploads', 'File\UploadsController@uploads')->name('file.uploads');
