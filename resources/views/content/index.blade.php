@@ -30,7 +30,7 @@
 
 @section('content-class', 'col-12')
 @section('content')
-    <div class="container pt-3">
+    <div class="container pt-3 pb-3">
         <ul class="list-group">
             @if(\Illuminate\Support\Facades\Auth::user())
                 <li class="list-group-item">
