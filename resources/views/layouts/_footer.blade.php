@@ -11,7 +11,7 @@
         @if(!empty($beian_code = \App\Models\Setting::get('beian_code')) && !empty($beian_text = \App\Models\Setting::get('beian_text')))
         <span class="nav-link text-white">
             <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode={{ $beian_code }}" target="_blank">
-                <image src="{{ asset('assets/icon/beian.png') }}"></image> {{ $beian_text }}
+                <img src="{{ asset('assets/icon/beian.png') }}" alt=""> {{ $beian_text }}
             </a>
         </span>
         @endif
