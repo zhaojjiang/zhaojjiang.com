@@ -104,7 +104,7 @@
             toolbarAutoFixed: false,
             placeholder: "输入内容",
             imageUpload: true,
-            imageUploadURL: "{{ route('file.uploads') }}?from=editor.md&type=image",
+            imageUploadURL: "{{ route('files.uploads') }}?from=editor.md&type=image",
         });
 
         $('#tags').select2({

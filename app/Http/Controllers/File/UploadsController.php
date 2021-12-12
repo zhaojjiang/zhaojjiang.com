@@ -37,7 +37,7 @@ class UploadsController extends Controller
 
         $user = Auth::user();
         $ts = microtime(true) * 1000;
-        $folder = "uploads/image/editor.md/" . date('Ym') . "/" . date('d');
+        $folder = "uploads/images/editor.md/" . date('Ym') . "/" . date('d');
         try {
             $file = $file->move(public_path($folder), "{$user->id}_{$ts}." . $file->getClientOriginalExtension());
         } catch (Exception $fileException) {

@@ -25,4 +25,6 @@ Route::get('/welcome', 'Page\PagesController@welcome')->name('page.welcome');
 Route::get('/about', 'Page\PagesController@about')->name('page.about');
 Route::resource('page', 'Page\PagesController')->except('destroy', 'create', 'store');
 
-Route::post('file-uploads', 'File\UploadsController@uploads')->name('file.uploads');
+Route::post('file-uploads', 'File\UploadsController@uploads')->name('files.uploads');
+Route::get('uploads/images/{image?}', 'File\FilesController@getImage')
+    ->where('image', '.*')->name('files.image.get');
