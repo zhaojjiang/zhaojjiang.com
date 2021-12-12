@@ -8,10 +8,6 @@
 
 @section('style')
     <style>
-        a {
-            text-decoration: unset;
-            color: unset;
-        }
         a:hover {
             color: unset;
         }
