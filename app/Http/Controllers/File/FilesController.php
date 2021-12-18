@@ -40,7 +40,7 @@ class FilesController extends Controller
                 $height = $wh[1];
                 $image = Image::make($image)->resize($width, $height);
                 $image = $image->response();
-            } else if (preg_match('/^zoom=(\d+\.?\d*)$/', $image_attr, $zoom)) {
+            } else if (preg_match('/^(\d+\.?\d*)$/', $image_attr, $zoom)) {
                 $zoom = (float)$zoom[1];
                 if ($zoom > 0 && $zoom !== 1.0) {
                     $image = Image::make($image);
