@@ -23,7 +23,7 @@ class ContentController extends Controller
 
     public function index()
     {
-        $contents = Content::query()->scopes(['type' => [Content::TYPE_POST]])->get();
+        $contents = Content::query()->scopes(['type' => [Content::TYPE_POST]])->latest()->paginate(12);
         return view('content.index', compact('contents'));
     }
 

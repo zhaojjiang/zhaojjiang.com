@@ -50,6 +50,10 @@
                     </span>
                 </li>
             @endforeach
+
+            <div class="align-self-center mt-3">
+                @include('shared._page', ['models' => $contents])
+            </div>
         </ul>
     </div>
 @endsection
