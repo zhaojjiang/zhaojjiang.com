@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Content;
-use App\Models\ContentTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -25,7 +23,7 @@ class TagsController extends Controller
     public function show($tag)
     {
         $tag = Tag::query()->with('contents')->findOrFail($tag);
-        $contents = $tag->contents;
+        $contents = $tag->contents()->latest()->paginate(12);
         return view('content.index', compact('contents', 'tag'));
     }
 }
