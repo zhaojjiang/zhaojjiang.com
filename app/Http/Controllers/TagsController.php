@@ -16,7 +16,7 @@ class TagsController extends Controller
 
     public function index()
     {
-        $tags = Tag::query()->withCount('contents')->get();
+        $tags = Tag::query()->whereHas('contents')->withCount('contents')->get();
         return view('tag.index', compact('tags'));
     }
 
